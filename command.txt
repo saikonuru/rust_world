@@ -1,0 +1,11 @@
+ rustc --version   
+rustup 
+
+rustup -V   
+
+ cargo new hello_world    
+
+cargo build
+ cargo run
+ rustup toolchain install stable-x86_64-pc-windows-gnu
+ rustup default stable-x86_64-pc-windows-gnu
