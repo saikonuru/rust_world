@@ -7,9 +7,13 @@ edition = "2021"
 rand = "0.8"
 
 
+# [[bin]]
+# name = "hello"
+# path = "./src/hello.rs"
+
 [[bin]]
-name = "hello"
-path = "./src/hello.rs"
+name = "banking"
+path = "./src/banking.rs"
 
 # [[bin]]
 # name = "rust_play"

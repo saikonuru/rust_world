@@ -167,6 +167,7 @@ fn cal_length(str_passed: String) -> (String, usize) {
     (str_passed, len)
 }
 
+// temperately passing ownership - allows to re-use
 // fn cal_length_ref(str_passed: &String) -> usize {
 //     str_passed.len()
 // }
@@ -286,7 +287,7 @@ fn main() {
     println!("Addition : {}", add(10, 20));
     println!("Subtraction : {}", sub(100, 20));
 
-    let x = 22;
+    let x: u32 = 22;
 
     match x {
         1 => println!("One"),
