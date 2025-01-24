@@ -6,14 +6,17 @@ edition = "2021"
 [dependencies]
 rand = "0.8"
 
-
 # [[bin]]
 # name = "hello"
 # path = "./src/hello.rs"
 
+# [[bin]]
+# name = "banking"
+# path = "./src/banking.rs"
+
 [[bin]]
-name = "banking"
-path = "./src/banking.rs"
+name = "struct_demo"
+path = "./src/struct_demo.rs"
 
 # [[bin]]
 # name = "rust_play"
