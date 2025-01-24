@@ -1,4 +1,6 @@
-use std::{io, ops::ControlFlow};
+use std::io;
+use std::io::Write;
+// use std::{io, ops::ControlFlow};
 
 fn main() {
     let mut balance: f64 = 0.0;
@@ -8,32 +10,12 @@ fn main() {
         println!("2. Withdraw");
         println!("3. Balance");
         println!("Any other key exit");
-        let mut input_str = String::new();
+        let input = get_user_input("Please your choice: ");
 
-        println!("Please your choice: ");
-        io::stdin()
-            .read_line(&mut input_str)
-            .expect("Invalid Input");
-        let input: u32 = match input_str.trim().parse() {
-            Ok(number) => number,
-            Err(_) => {
-                println!("Invalid Number");
-                continue;
-            }
-        };
-
-        match input {
-            1 => {
-                if let ControlFlow::Break(_) = fn_deposit(&mut balance) {
-                    continue;
-                }
-            }
-            2 => {
-                if let ControlFlow::Break(_) = fn_withdraw(&mut balance) {
-                    continue;
-                }
-            }
-            3 => println!("Balance:{}", balance),
+        match input.trim().parse::<u32>() {
+            Ok(1) => fn_deposit(&mut balance),
+            Ok(2) => fn_withdraw(&mut balance),
+            Ok(3) => println!("Balance: {}", balance),
             _ => {
                 println!("Thank you!");
                 break;
@@ -42,48 +24,55 @@ fn main() {
     }
 }
 
-fn fn_withdraw(balance: &mut f64) -> ControlFlow<()> {
-    let mut withdraw_input = String::new();
-    println!("Please withdraw amount: ");
+fn get_user_input(prompt: &str) -> String {
+    let mut input_str = String::new();
+    print!("{}", prompt);
+    io::stdout().flush().unwrap();
     io::stdin()
-        .read_line(&mut withdraw_input)
-        .expect("Invalid Input");
-    let withdraw: f64 = match withdraw_input.trim().parse() {
-        Ok(withdraw) => withdraw,
-        Err(_) => {
-            println!("Invalid Number");
-            return ControlFlow::Break(());
-        }
-    };
-    if withdraw > *balance {
-        println!("Insufficient balance, account balance is {}", balance);
-        return ControlFlow::Break(());
-    }
-    *balance -= withdraw;
-    println!("After withdraw, current balance is {}", balance);
-
-    ControlFlow::Continue(())
+        .read_line(&mut input_str)
+        .expect("Failed to read input");
+    input_str
 }
 
-fn fn_deposit(balance: &mut f64) -> ControlFlow<()> {
-    let mut deposite_input = String::new();
-    println!("Please deposit amount: ");
-    io::stdin()
-        .read_line(&mut deposite_input)
-        .expect("Invalid Input");
-    let deposit: f64 = match deposite_input.trim().parse() {
+fn fn_deposit(balance: &mut f64) {
+    let input = get_user_input("Please enter deposit amount: ");
+    let amount: f64 = match input.trim().parse() {
         Ok(deposit) => deposit,
         Err(_) => {
             println!("Invalid Number");
-            return ControlFlow::Break(());
+            return;
         }
     };
-    if deposit <= 0.0 {
-        println!("Deposit should not bea negative or zero number");
-        return ControlFlow::Break(());
+    if amount <= 0.0 {
+        println!("Amount {} should not be a negative or zero number", amount);
+        return;
     }
-    *balance += deposit;
-    println!("After Deposit account balance is {}", balance);
+    *balance += amount;
+    println!("After deposit, account balance is {}", balance);
 
-    ControlFlow::Continue(())
+    // ControlFlow::Continue(())
 }
+
+// fn fn_withdraw(balance: &mut f64) -> ControlFlow<()> {
+fn fn_withdraw(balance: &mut f64) {
+    let input = get_user_input("Please enter withdraw amount: ");
+    let amount: f64 = match input.trim().parse() {
+        Ok(withdraw) => withdraw,
+        Err(_) => {
+            println!("Invalid Number");
+            return;
+        }
+    };
+    if amount <= 0.0 {
+        println!("Amount {} should not be a negative or zero number", amount);
+        return;
+    }
+    if amount > *balance {
+        println!("Insufficient balance, account balance is {}", balance);
+        return;
+    }
+    *balance -= amount;
+    println!("After withdraw, current balance is {}", balance);
+}
+
+// fn fn_deposit(balance: &mut f64) -> ControlFlow<()> {
