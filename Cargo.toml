@@ -14,9 +14,14 @@ rand = "0.8"
 # name = "banking"
 # path = "./src/banking.rs"
 
+# [[bin]]
+# name = "struct_demo"
+# path = "./src/struct_demo.rs"
+
 [[bin]]
-name = "struct_demo"
-path = "./src/struct_demo.rs"
+name = "library"
+path = "./src/library.rs"
+
 
 # [[bin]]
 # name = "rust_play"
