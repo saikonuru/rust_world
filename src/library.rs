@@ -27,6 +27,7 @@ impl Book {
             Err(LibraryError::AlreadyBorrowed)
         }
     }
+
     fn return_book(&mut self) {
         self.is_available = true;
     }
@@ -52,6 +53,7 @@ impl Library {
             Err(LibraryError::BookNotFound)
         }
     }
+
     fn return_book(&mut self) -> Result<(), LibraryError> {
         if let Some(book) = self.book.as_mut() {
             book.return_book();
@@ -64,13 +66,13 @@ impl Library {
 
 fn main() {
     let book = Book {
-        title: String::from("The Rust Book"),
-        author: String::from("Steve Klabnik"),
+        title: "The Rust Book".to_string(),
+        author: "Steve Klabnik".to_string(),
         is_available: true,
     };
     let mut library = Library {
-        name: String::from("City Library"),
-        address: String::from("123 Library Lane"),
+        name: "City Library".to_string(),
+        address: "123 Library Lane".to_string(),
         book: None, //assuming that there is only one book of The Rust Book in library
     };
 
