@@ -41,14 +41,27 @@ serde_json = "1.0"
 # path = "./src/iterator_demo.rs"
 
 
-[[bin]]
-name = "marco_demo"
-path = "./src/marco_demo.rs"
+# [[bin]]
+# name = "marco_demo"
+# path = "./src/marco_demo.rs"
+
+# [[bin]]
+# name = "todo"
+# path = "./src/todo.rs"
+
+
+# [[bin]]
+# name = "todo_struct"
+# path = "./src/todo_struct.rs"
+
+# [[bin]]
+# name = "todo_trait"
+# path = "./src/todo_trait.rs"
+
 
 [[bin]]
-name = "todo"
-path = "./src/todo.rs"
-
+name = "lifetime"
+path = "./src/lifetime.rs"
 
 # [[bin]]
 # name = "trait_demo"
